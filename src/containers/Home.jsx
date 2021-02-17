@@ -1,8 +1,21 @@
 import React from 'react';
-function App() {
+import WorkIn from '../components/WorkIn';
+import Welcome from '../components/Welcome';
+import Worklist from '../components/WorkList';
+import WorkListItem from '../components/WorkListItem';
+
+const App = () => {
   return (
-    <div className="App">
-      
+    <div className="home">
+      <WorkIn />
+      <Welcome>
+        <Worklist>
+          <WorkListItem />
+          <WorkListItem />
+          <WorkListItem />
+          <WorkListItem />
+        </Worklist>
+      </Welcome>
     </div>
   );
 }
