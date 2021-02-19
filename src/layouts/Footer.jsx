@@ -5,7 +5,7 @@ const Footer = () => (
     <footer className="footer">
         <div className="container">
             <nav className="flex">
-                <Link to="/"><i className="fa fa-home" /></Link>
+                <Link to="/dashboard"><i className="fa fa-home" /></Link>
                 <Link><i className="fa fa-bell" /></Link>
                 <Link><i className="fa fa-user" /></Link>
                 <Link to="/workslist"><i className="fa fa-list" /></Link>
