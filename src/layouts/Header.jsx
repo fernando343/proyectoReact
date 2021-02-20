@@ -1,7 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { logoutRequest } from "../actions";
 
-const Header = () => {
+const Header = (props) => {
+
+  const handleLogout = () => {
+    props.logoutRequest({});
+  };
+
   return (
     <>
       <header className="header">
@@ -13,7 +20,7 @@ const Header = () => {
             <Link>
               <i className="fa fa-bell" />
             </Link>
-            <Link>
+            <Link to="/userprofile">
               <i className="fa fa-user" />
             </Link>
             <Link to="/workslist">
@@ -25,9 +32,9 @@ const Header = () => {
           </nav>
           <div className="search-nav">
             <input type="search" placeholder="Search" />
-            <Link>
+            <a href="#logout" onClick={handleLogout}>
               <i className="fa fa-sign-out" />
-            </Link>
+            </a>
           </div>
         </div>
       </header>
@@ -35,4 +42,14 @@ const Header = () => {
   );
 };
 
-export default Header;
+const mapStateToProps = (state) => {
+  return {
+    user: state.user,
+  };
+};
+
+const mapDispatchToProps = {
+  logoutRequest,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

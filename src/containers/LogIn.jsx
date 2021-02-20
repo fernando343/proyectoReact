@@ -1,8 +1,28 @@
-import React from "react";
-import HeaderOut from "../layouts/HeaderOut";
+import React, { useState } from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import HeaderOut from "../layouts/HeaderOut";
+import { loginRequest } from "../actions";
 
-const LogIn = () => {
+
+const LogIn = (props) => {
+  const [form, setValues] = useState({
+    email: "",
+  });
+
+  const handleInput = (event) => {
+    setValues({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    props.loginRequest(form);
+    props.history.push("/dashboard");
+  };
+
   return (
     <>
       <HeaderOut />
@@ -13,9 +33,19 @@ const LogIn = () => {
             <h1>LOGO</h1>
             <h3>Log In</h3>
 
-            <form>
-              <input type="email" placeholder="Email" />
-              <input type="password" placeholder="Password" />
+            <form onSubmit={handleSubmit}>
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                onChange={handleInput}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={handleInput}
+              />
               <input type="Submit" value="Sign up" />
             </form>
             <p>
@@ -26,7 +56,7 @@ const LogIn = () => {
               <i className="fa fa-facebook-f"></i> Sign Up with Facebook
             </Link>
             <Link href="#google" className="network">
-              <i className="fa fa-google"></i> Sign Up with Google{" "}
+              <i className="fa fa-google"></i> Sign Up with Google
             </Link>
           </div>
         </div>
@@ -35,4 +65,8 @@ const LogIn = () => {
   );
 };
 
-export default LogIn;
+const mapDispatchToProps = {
+  loginRequest,
+};
+
+export default connect(null, mapDispatchToProps)(LogIn);

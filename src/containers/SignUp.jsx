@@ -1,8 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import HeaderOut from "../layouts/HeaderOut";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { registerRequest } from "../actions";
 
-const SignUp = () => {
+const SignUp = (props) => {
+  const [form, setValues] = useState({
+    email: "",
+    name: "",
+    username: "",
+    password: "",
+  });
+
+  const handleInput = (event) => {
+    setValues({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    props.registerRequest(form);
+    props.history.push("/dashboard");
+  };
+
   return (
     <>
       <HeaderOut />
@@ -13,13 +35,37 @@ const SignUp = () => {
             <h1>LOGO</h1>
             <h3>sign up</h3>
 
-            <form>
-              <input type="text" placeholder="Full Name" />
-              <input type="text" placeholder="Username" />
-              <input type="email" placeholder="Email" />
-              <input type="password" placeholder="Password" />
-              <input type="password" placeholder="Re Password" />
-              <input type="Submit" value="Sign up" />
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                placeholder="Full Name"
+                name="name"
+                onChange={handleInput}
+              />
+              <input
+                type="text"
+                placeholder="Username"
+                name="username"
+                onChange={handleInput}
+              />
+              <input
+                type="email"
+                placeholder="Email"
+                name="email"
+                onChange={handleInput}
+              />
+              <input
+                type="password"
+                placeholder="Password"
+                name="password"
+                onChange={handleInput}
+              />
+              <input
+                type="password"
+                placeholder="Re Password"
+                onChange={handleInput}
+              />
+              <input type="Submit" value="Sign up" onChange={handleInput} />
             </form>
             <p>
               You have account? <Link href="">Log In</Link>
@@ -38,4 +84,8 @@ const SignUp = () => {
   );
 };
 
-export default SignUp;
+const mapDispatchToProps = {
+  registerRequest,
+};
+
+export default connect(null, mapDispatchToProps)(SignUp);

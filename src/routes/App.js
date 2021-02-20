@@ -7,6 +7,7 @@ import LogIn from '../containers/LogIn';
 import Dashboard from '../containers/Dashboard';
 import Works from '../containers/Works';
 import Chat from '../layouts/Chat';
+import UserProfile from '../containers/UserProfile';
 
 
 const App = () => (
@@ -18,6 +19,7 @@ const App = () => (
             <Route exact path="/dashboard" component={Dashboard} />
             <Route exact path="/workslist" component={Works} />
             <Route exact path="/chat" component={Chat} />
+            <Route exact path="/userprofile" component={UserProfile} />
         </Switch>
     </BrowserRouter>
 );
